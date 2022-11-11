@@ -1,6 +1,12 @@
 import cv2 as cv
 import numpy as np
 
+def preprocessing_image(img):
+    gray = get_gray_scale(img)
+    thresh = thresholding(gray)
+    open = opening(thresh)
+    return open
+
 # get gray scale image
 def get_gray_scale(img):
     return cv.cvtColor(img, cv.COLOR_BGR2GRAY)

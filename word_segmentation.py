@@ -31,6 +31,12 @@ def histogram_vertical(bw):
         hist_v[i] = np.count_nonzero(bw[:, i])
     return hist_v
 
+def resize_image(img, scale_percent):
+    width = int(img.shape[1] * scale_percent / 100)
+    height = int(img.shape[0] * scale_percent / 100)
+    dim = (width, height)
+    # resize image
+    return cv.resize(img, dim, interpolation=cv.INTER_AREA)
 
 def read_lines(path):
 
@@ -39,6 +45,7 @@ def read_lines(path):
     for i in range(len(files)):
         print(path+files[i])
         img1 = cv.imread(str(path)+'/'+str(files[i]))
+        img1 = resize_image(img1, 20)
         lines_img.append(img1)
         cv.imshow(str(i), lines_img[i])
     cv.waitKey(0)
@@ -87,7 +94,7 @@ def show_paws(paws):
     for i in range(1, len(paws)+1):
         plt.subplot(len(paws)//3+1,3,i)
         plt.imshow(~paws[-i], cmap=plt.cm.gray)
-        plt.title('PAW'+str(i))
+        # plt.title('PAW'+str(i))
         plt.axis('off')
 
     plt.savefig('Paws/paws.png')

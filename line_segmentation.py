@@ -14,15 +14,13 @@ def lines_segmentation(img):
     """
 
     #img = cv.cvtColor(img, )
-    cv.imshow('img', img)
     bw = binarisation(img)
-    cv.imshow('bin', bw)
     hist_h = histogram_horizontal(bw)
     hist_v = histogram_vertical(bw)
     img_hist_h = create_img_hist_h(bw, hist_h)
     img_hist_v = create_img_hist_v(bw, hist_v)
     save_hist_results(img, img_hist_h, img_hist_v)
-    show_results(img, img_hist_h, img_hist_v)
+    # show_results(img, img_hist_h, img_hist_v)
     nb_ligne, position_lignes, lignes_img = detection_ligne(bw, hist_h)
     save_lines(lignes_img)
     show_lines(lignes_img)
@@ -124,7 +122,7 @@ def show_lines(lines):
         im_hist_h[:,:] = 255
         im_hist_v = np.zeros(line.shape, np.uint8)
         im_hist_v[:, :] = 255
-        cv.imshow('histH', cv.hconcat([~line,im_hist_h]))
-        cv.imshow('histV', cv.hconcat([~line, im_hist_v]))
+        # cv.imshow('histH', cv.hconcat([~line,im_hist_h]))
+        # cv.imshow('histV', cv.hconcat([~line, im_hist_v]))
     cv.waitKey(0)
     cv.destroyAllWindows()
